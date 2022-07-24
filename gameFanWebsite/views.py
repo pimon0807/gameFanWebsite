@@ -1,9 +1,16 @@
 import random
 
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 
 # Create your views here.
+
+samplePicList = [
+        'https://cdn.pixabay.com/photo/2016/02/15/14/45/playing-cards-1201257_1280.jpg',
+        'https://img.freepik.com/free-vector/playing-casino-card-chips-and-dice-flying-background_1017-30143.jpg?t=st=1658662634~exp=1658663234~hmac=c8db1caf344d477fbb32c3714761570309f901cd2082912beb17ecb45ac1146a&w=1800',
+        'https://img.freepik.com/premium-photo/poker-player-showing-a-pair-of-aces_306105-9.jpg?w=1800',
+        'https://img.freepik.com/premium-photo/gambling-close-up-cards-for-playing-poker-on-a-gaming-table-in-a-casino_391052-1268.jpg?w=1800',
+    ]
 
 playerList = [
     {
@@ -26,13 +33,18 @@ playerList = [
     },
 ]
 
+externalLinksList = [
+    {
+        "name": "任天堂",
+        "url": "https://www.nintendo.co.jp/others/playing_cards/howtoplay/poker/index.html"
+    },
+    {
+        "name": "全日本ポーカー選手権",
+        "url": "https://www.ajpc.jp/about-poker/"
+    },
+]
+
 def indexView(request):
-    samplePicList = [
-        'https://cdn.pixabay.com/photo/2016/02/15/14/45/playing-cards-1201257_1280.jpg',
-        'https://img.freepik.com/free-vector/playing-casino-card-chips-and-dice-flying-background_1017-30143.jpg?t=st=1658662634~exp=1658663234~hmac=c8db1caf344d477fbb32c3714761570309f901cd2082912beb17ecb45ac1146a&w=1800',
-        'https://img.freepik.com/premium-photo/poker-player-showing-a-pair-of-aces_306105-9.jpg?w=1800',
-        'https://img.freepik.com/premium-photo/gambling-close-up-cards-for-playing-poker-on-a-gaming-table-in-a-casino_391052-1268.jpg?w=1800',
-    ]
     ctx = {"pic": random.choice(samplePicList)}
     return HttpResponse(render(request, 'index.html', ctx))
 
@@ -40,8 +52,15 @@ def indexView(request):
 def rulesView(request):
     return HttpResponse(render(request, 'rules.html'))
 
-def notablesDetail(request):
-    return redirect('notablesDetail', notableIndex=0)
+def notablesDetail(request, notableIndex):
+    try:
+        ctx = {
+            "num": notableIndex,
+            "data": playerList[notableIndex-1]
+               }
+    except:
+        raise Http404("選手は存在しません")
+    return HttpResponse(render(request, 'notablesDetail.html', ctx))
 
 
 def notablesList(request):
@@ -50,4 +69,5 @@ def notablesList(request):
 
 
 def externalLinks(request):
-    return HttpResponse(render(request, 'externalLinks.html'))
+    ctx = {"data": externalLinksList}
+    return HttpResponse(render(request, 'externalLinks.html', ctx))

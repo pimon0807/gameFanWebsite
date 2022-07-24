@@ -3,5 +3,12 @@
 {% block title %}externalLinks{% endblock %}
 
 {% block content %}
-    <h1>externalLinks</h1>
+    <h1>ExternalLinks</h1>
+    {% for link in data %}
+        <ul>
+            <li>
+                <p>{{ link.name }}: <a href="{{ link.url }}">{{ link.url }}</a></p>
+            </li>
+        </ul>
+    {% endfor %}
 {% endblock %}
