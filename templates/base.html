@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+        <nav>
+            <ul>
+                <li><a href={% url 'gameFanWebsite:index' %}>Home</a></li>
+                <li><a href={% url 'gameFanWebsite:rules' %}>Rule</a></li>
+                <li><a href={% url 'gameFanWebsite:notablesList' %}>Notables</a></li>
+                <li><a href={% url 'gameFanWebsite:externalLinks' %}>Link</a></li>
+            </ul>
+        </nav>
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+    <footer>
+        <p>© 2022 GameFanWebsite All Rights Reserved.</p>
+    </footer>
+</html>
