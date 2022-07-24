@@ -4,4 +4,8 @@
 
 {% block content %}
     <h1>notables</h1>
+    {% for player in data %}
+        <p>{{ player.name }}</p>
+        <img src="{{ player.pic }}" width="100" height="auto">
+    {% endfor %}
 {% endblock %}
