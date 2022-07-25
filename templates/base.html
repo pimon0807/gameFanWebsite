@@ -3,19 +3,22 @@
 
 <head>
     <meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <title>{% block title %}{% endblock %}</title>
 </head>
 
 <body>
-        <nav>
-            <ul>
-                <li><a href={% url 'gameFanWebsite:index' %}>Home</a></li>
-                <li><a href={% url 'gameFanWebsite:rules' %}>Rule</a></li>
-                <li><a href={% url 'gameFanWebsite:notablesList' %}>Notables</a></li>
-                <li><a href={% url 'gameFanWebsite:externalLinks' %}>Link</a></li>
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class=>
+                <ul class="navbar-nav m-2">
+                    <li class="nav-item m-2"><a href={% url 'gameFanWebsite:index' %}>Home</a></li>
+                    <li class="nav-item m-2"><a href={% url 'gameFanWebsite:rules' %}>Rule</a></li>
+                    <li class="nav-item m-2"><a href={% url 'gameFanWebsite:notablesList' %}>Notables</a></li>
+                    <li class="nav-item m-2"><a href={% url 'gameFanWebsite:externalLinks' %}>Link</a></li>
+                </ul>
+            </div>
         </nav>
-    <div>
+    <div class="p-3">
         {% block content %}{% endblock %}
     </div>
 </body>
